@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stockholm Travel Guide</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="#">Stockholm</a>
+      <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#food">Food</a></li>
+        <li><a href="#budget">Budget Tips</a></li>
+        <li><a href="#map">Map</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">Travel Guide 2026</span>
+      <h1>Discover Stockholm</h1>
+      <p>Scandinavia's stunning capital — islands, history, design, and incredible food without breaking the bank.</p>
+      <a href="#activities" class="btn-primary">Explore the City</a>
+    </div>
+    <div class="hero-scroll">↓</div>
+  </header>
+
+  <!-- INTRO STATS -->
+  <section class="stats">
+    <div class="stat"><span class="stat-num">14</span><span class="stat-label">Islands</span></div>
+    <div class="stat"><span class="stat-num">800+</span><span class="stat-label">Years of History</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Michelin Stars</span></div>
+    <div class="stat"><span class="stat-num">~50€</span><span class="stat-label">Budget/Day</span></div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Things to Do</h2>
+        <p>From medieval old town to modern museums — something for every traveller.</p>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="free">Free</button>
+        <button class="filter-btn" data-filter="paid">Paid</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+        <button class="filter-btn" data-filter="culture">Culture</button>
+      </div>
+      <div class="cards-grid" id="activities-grid">
+
+        <div class="card" data-tags="free outdoor culture">
+          <div class="card-img" style="background:#c8dde8">
+            <span class="card-emoji">🏰</span>
+          </div>
+          <div class="card-body">
+            <span class="badge free">Free</span>
+            <h3>Gamla Stan</h3>
+            <p>Wander the medieval cobblestone streets of Stockholm's old town. See the Royal Palace, Stortorget square, and charming alleyways.</p>
+            <div class="card-meta"><span>🕐 2–3 hrs</span><span>🗺 City Centre</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="free outdoor">
+          <div class="card-img" style="background:#d4e8c8">
+            <span class="card-emoji">🌿</span>
+          </div>
+          <div class="card-body">
+            <span class="badge free">Free</span>
+            <h3>Djurgården Island</h3>
+            <p>A royal park and museum island. Perfect for picnics, cycling, and walking along the water. Entry to the island is always free.</p>
+            <div class="card-meta"><span>🕐 Half day</span><span>🗺 Djurgården</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="paid culture">
+          <div class="card-img" style="background:#e8d4c8">
+            <span class="card-emoji">🚢</span>
+          </div>
+          <div class="card-body">
+            <span class="badge paid">~200 SEK</span>
+            <h3>Vasa Museum</h3>
+            <p>Home to a perfectly preserved 17th-century warship that sank on its maiden voyage. One of the world's most visited museums.</p>
+            <div class="card-meta"><span>🕐 1–2 hrs</span><span>🗺 Djurgården</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="free culture">
+          <div class="card-img" style="background:#e8e8c8">
+            <span class="card-emoji">🎨</span>
+          </div>
+          <div class="card-body">
+            <span class="badge free">Free</span>
+            <h3>Moderna Museet</h3>
+            <p>World-class modern and contemporary art — Picasso, Dalí, and Swedish masters. Permanent collection is free to visit.</p>
+            <div class="card-meta"><span>🕐 1–2 hrs</span><span>🗺 Skeppsholmen</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="paid outdoor">
+          <div class="card-img" style="background:#c8c8e8">
+            <span class="card-emoji">🏔</span>
+          </div>
+          <div class="card-body">
+            <span class="badge paid">~150 SEK</span>
+            <h3>Kaknästornet</h3>
+            <p>Stockholm's tallest tower with a 360° observation deck. Stunning panoramic views over the archipelago and city skyline.</p>
+            <div class="card-meta"><span>🕐 1 hr</span><span>🗺 Gärdet</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="free outdoor">
+          <div class="card-img" style="background:#e8c8d4">
+            <span class="card-emoji">🌊</span>
+          </div>
+          <div class="card-body">
+            <span class="badge free">Free</span>
+            <h3>Archipelago Walk</h3>
+            <p>Stroll along the waterfront from Strandvägen to Nybrokajen. Gorgeous views, historic boats, and elegant buildings.</p>
+            <div class="card-meta"><span>🕐 1 hr</span><span>🗺 Östermalm</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="paid culture">
+          <div class="card-img" style="background:#c8e8e8">
+            <span class="card-emoji">👑</span>
+          </div>
+          <div class="card-body">
+            <span class="badge paid">~180 SEK</span>
+            <h3>Royal Palace</h3>
+            <p>One of the largest palaces in Europe still in use. Explore the royal apartments, Treasury, and the Tre Kronor Museum.</p>
+            <div class="card-meta"><span>🕐 2 hrs</span><span>🗺 Gamla Stan</span></div>
+          </div>
+        </div>
+
+        <div class="card" data-tags="free culture outdoor">
+          <div class="card-img" style="background:#e8d8c8">
+            <span class="card-emoji">📚</span>
+          </div>
+          <div class="card-body">
+            <span class="badge free">Free</span>
+            <h3>Södermalm Explore</h3>
+            <p>Stockholm's hip bohemian neighbourhood. Street art, vintage shops, great cafés and the famous Monteliusvägen viewpoint.</p>
+            <div class="card-meta"><span>🕐 2–3 hrs</span><span>🗺 Södermalm</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Where to Eat</h2>
+        <p>From classic Swedish classics to budget street food — eat well without overspending.</p>
+      </div>
+
+      <div class="food-categories">
+        <div class="food-cat-btn active" data-cat="all">All</div>
+        <div class="food-cat-btn" data-cat="budget">Budget</div>
+        <div class="food-cat-btn" data-cat="mid">Mid-range</div>
+        <div class="food-cat-btn" data-cat="splurge">Splurge</div>
+        <div class="food-cat-btn" data-cat="classic">Swedish Classic</div>
+      </div>
+
+      <div class="food-grid" id="food-grid">
+
+        <div class="food-card" data-cat="budget classic">
+          <div class="food-emoji">🥩</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Husmanskost</h3>
+              <span class="price-tag budget">50–90 SEK</span>
+            </div>
+            <p>Traditional Swedish home cooking — meatballs, pea soup, or Janssons frestelse. Look for <em>dagens rätt</em> (daily lunch special) in local restaurants for a full meal with bread, salad, and coffee.</p>
+            <div class="food-tags"><span>Classic</span><span>Lunch</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="budget">
+          <div class="food-emoji">🌭</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Tunnbrödsrulle</h3>
+              <span class="price-tag budget">40–60 SEK</span>
+            </div>
+            <p>Stockholm's iconic street food — a sausage wrapped in soft flatbread with mashed potato, shrimp salad, and onion. Find them at hotdog stands across the city, especially near Medborgarplatsen.</p>
+            <div class="food-tags"><span>Street Food</span><span>Budget</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="budget classic">
+          <div class="food-emoji">🥐</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Fika Break</h3>
+              <span class="price-tag budget">35–70 SEK</span>
+            </div>
+            <p>Sweden's sacred coffee-and-pastry ritual. Grab a cinnamon bun (<em>kanelbulle</em>) and coffee at any café. Wayne's Coffee and Espresso House are budget-friendly chains everywhere.</p>
+            <div class="food-tags"><span>Café</span><span>Swedish</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="mid classic">
+          <div class="food-emoji">🐟</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Smörgåsbord</h3>
+              <span class="price-tag mid">150–250 SEK</span>
+            </div>
+            <p>The classic Swedish buffet — gravlax, pickled herring, cold cuts, eggs, and crispbread. Many hotels offer it for breakfast/brunch. Lisa på Torget is a great choice.</p>
+            <div class="food-tags"><span>Buffet</span><span>Classic</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="mid">
+          <div class="food-emoji">🍣</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Östermalm Food Hall</h3>
+              <span class="price-tag mid">100–200 SEK</span>
+            </div>
+            <p>A beautiful 19th-century indoor market. Mix of vendors selling fresh seafood, cheese, meats, and ready-to-eat dishes. Perfect for a varied lunch in an iconic setting.</p>
+            <div class="food-tags"><span>Market</span><span>Varied</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="budget mid">
+          <div class="food-emoji">🫙</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>ICA / Hemköp Picnic</h3>
+              <span class="price-tag budget">60–100 SEK</span>
+            </div>
+            <p>Stockholm's supermarkets stock excellent deli sections and ready meals. Grab supplies and picnic on Djurgården or at Rålambshovsparken — a local favourite.</p>
+            <div class="food-tags"><span>Picnic</span><span>Budget</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="splurge classic">
+          <div class="food-emoji">🦐</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Archipelago Seafood</h3>
+              <span class="price-tag splurge">300–500 SEK</span>
+            </div>
+            <p>Fresh West Coast shrimp, crayfish in season, and smoked salmon at dockside restaurants in Gamla Stan or along Strandvägen. Treat yourself at least once.</p>
+            <div class="food-tags"><span>Seafood</span><span>Special Occasion</span></div>
+          </div>
+        </div>
+
+        <div class="food-card" data-cat="budget">
+          <div class="food-emoji">🫓</div>
+          <div class="food-info">
+            <div class="food-header">
+              <h3>Bakery Lunch</h3>
+              <span class="price-tag budget">60–90 SEK</span>
+            </div>
+            <p>Swedish bakeries sell sandwiches (<em>smörgås</em>) on sourdough or rye with toppings like egg & anchovies or shrimp. Try Tösses or Petite France in Östermalm.</p>
+            <div class="food-tags"><span>Lunch</span><span>Budget</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET TIPS -->
+  <section id="budget" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Budget Travel Tips</h2>
+        <p>Stockholm can be expensive — but smart choices make it very affordable.</p>
+      </div>
+
+      <div class="budget-grid">
+
+        <div class="budget-card">
+          <div class="budget-icon">🎫</div>
+          <h3>Stockholm Pass</h3>
+          <p>If you plan to visit 3+ paid attractions, the Stockholm Pass gives free entry to 60+ sites including Vasa Museum, Royal Palace, and boat tours. Starts around 600 SEK/day.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🚇</div>
+          <h3>SL Transport Card</h3>
+          <p>Load an SL Access card for unlimited metro, bus, tram, and ferry travel. A 24-hour pass is ~165 SEK — far cheaper than taxis. The metro itself is an art gallery worth riding!</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🏕</div>
+          <h3>Allemansrätten</h3>
+          <p>Sweden's unique "Right to Roam" law means you can camp, hike, and picnic anywhere in nature for free. Day trips to the outer archipelago cost only the ferry fare.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🍽</div>
+          <h3>Dagens Rätt (Lunch Deal)</h3>
+          <p>Most restaurants offer a fixed <em>dagens rätt</em> (daily special) 11:00–14:00 for 100–130 SEK including main, salad, bread, and drink. Use this for your main meal of the day.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🏛</div>
+          <h3>Free Museum Days</h3>
+          <p>Moderna Museet, Historiska Museet, Arkitekturmuseet, and Nationalmuseum are all free year-round. Plan your cultural days around free venues to save hundreds of SEK.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🚲</div>
+          <h3>City Bikes</h3>
+          <p>Stockholm City Bikes stations are everywhere. A 3-day pass is around 165 SEK — perfect for exploring the flat waterfront areas and Djurgården without paying for transport.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">🌅</div>
+          <h3>Free Viewpoints</h3>
+          <p>Monteliusvägen in Södermalm, Skinnarviksberget park, and Fjällgatan all offer stunning panoramic views over Stockholm completely free — skip the paid towers.</p>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-icon">💶</div>
+          <h3>Daily Budget Breakdown</h3>
+          <p><strong>Budget: ~450 SEK/day</strong><br>
+          Transport 50 + Lunch special 120 + Snacks/fika 70 + Dinner 150 + Entry fee (amortised) 60 SEK</p>
+        </div>
+
+      </div>
+
+      <div class="budget-summary">
+        <h3>Estimated Daily Costs</h3>
+        <div class="cost-table">
+          <div class="cost-row">
+            <span>Backpacker (hostel, self-catering)</span>
+            <span class="cost">~350–500 SEK</span>
+          </div>
+          <div class="cost-row">
+            <span>Mid-range (budget hotel, mix of eating out)</span>
+            <span class="cost">~800–1,400 SEK</span>
+          </div>
+          <div class="cost-row">
+            <span>Comfortable (3★ hotel, restaurants)</span>
+            <span class="cost">~1,800–2,500 SEK</span>
+          </div>
+        </div>
+        <p class="note">10 SEK ≈ 0.85 EUR ≈ 0.95 USD (as of 2026)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Interactive Map</h2>
+        <p>Explore Stockholm's key spots — click a marker for details.</p>
+      </div>
+      <div class="map-legend">
+        <span class="legend-item"><span class="dot activity"></span>Activities</span>
+        <span class="legend-item"><span class="dot food-dot"></span>Food &amp; Drink</span>
+        <span class="legend-item"><span class="dot viewpoint"></span>Viewpoints</span>
+        <span class="legend-item"><span class="dot transport"></span>Transport</span>
+      </div>
+      <div id="map-container"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-logo">Stockholm Travel Guide</p>
+      <p>Built with ❤ for budget travellers. Information current as of 2026.</p>
+      <p class="footer-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors. Map tiles by <a href="https://carto.com/" target="_blank">CARTO</a>.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
